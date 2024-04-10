@@ -2,7 +2,8 @@
 
 public class Veiculo
 {
-    public string Chassi { get; set; }
+    public int? Id { get; set; }
+    public string? Chassi { get; set; }
     public TipoVeiculo TipoVeiculo { get; set; }
-    public string Cor { get; set; }
+    public string? Cor { get; set; }
 }
