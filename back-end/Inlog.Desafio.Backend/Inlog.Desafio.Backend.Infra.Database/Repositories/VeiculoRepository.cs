@@ -28,9 +28,21 @@ namespace Inlog.Desafio.Backend.Infra.Database.Repositories
             return await context.SaveChangesAsync() > 0 ? true : false;
         }
 
-        public async Task<IList<Veiculo>> GetAll()            
+        public async Task<IList<Veiculo>> GetAll(double? latitude, double? longitude)            
         {
+            if(latitude is not null && longitude is not null)
+            {
+                return await context.Veiculos.OrderBy(x =>
+                        Math.Acos(
+                            Math.Sin(x.Latitude * Math.PI / 180) * Math.Sin(latitude.Value * Math.PI / 180) +
+                            Math.Cos(x.Latitude * Math.PI / 180) * Math.Cos(latitude.Value * Math.PI / 180) *
+                            Math.Cos((longitude.Value - x.Longitude) * Math.PI / 180)
+                        ) * 6371
+                    ).ToListAsync();
+            }
+
             return await context.Veiculos.ToListAsync();
+
         }
 
         public async Task<Veiculo> GetVeiculoAsync(int id)

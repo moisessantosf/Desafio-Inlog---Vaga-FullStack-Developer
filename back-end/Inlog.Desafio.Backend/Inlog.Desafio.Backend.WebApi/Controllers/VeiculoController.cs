@@ -19,7 +19,7 @@ public class VeiculoController : ControllerBase
     }
 
     [HttpPost("Cadastrar")]
-    public async Task<ActionResult<Result<VeiculoDTO>>> Cadastrar([FromBody] VeiculoCreateRequestDTO dadosDoVeiculo)
+    public async Task<ActionResult<Result<VeiculoDTO>>> Cadastrar(VeiculoCreateRequestDTO dadosDoVeiculo)
     {
         if (dadosDoVeiculo is null)
             return BadRequest();
@@ -28,12 +28,12 @@ public class VeiculoController : ControllerBase
         
         return Ok(response);
     }
-
+   
     [HttpGet("Listar")]
-    public async Task<IActionResult> ListarVeiculosAsync()
+    public async Task<ActionResult<Result<List<VeiculoDTO>>>> ListarVeiculosAsync(double? latitude, double? longitude)
     {
         // TODO: retornar todos veiculos 
-        var response = await _veiculoService.GetAll();
+        var response = await _veiculoService.GetAll(latitude, longitude);
 
         return Ok(response);
     }

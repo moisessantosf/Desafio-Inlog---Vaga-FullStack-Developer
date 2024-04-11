@@ -25,10 +25,13 @@ namespace Inlog.Desafio.Backend.Application.Mappers
             return new VeiculoDTO()
             {
                 Id = veiculo.Id,
+                Placa = veiculo.Placa,
                 Chassi = veiculo.Chassi,
                 TipoVeiculo = veiculo.TipoVeiculo,
-                DescricaoTipoVeiculo = Enum.GetName(typeof(TipoVeiculo), veiculo.TipoVeiculo),
-                Cor = veiculo.Cor
+                DescricaoTipoVeiculo = veiculo.TipoVeiculo.ToString(),
+                Cor = veiculo.Cor,
+                Latitude = veiculo.Latitude,
+                Longitude = veiculo.Longitude
             };
         }
     }

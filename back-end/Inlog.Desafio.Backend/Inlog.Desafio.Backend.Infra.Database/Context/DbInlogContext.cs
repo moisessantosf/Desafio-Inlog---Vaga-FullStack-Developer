@@ -16,6 +16,5 @@ namespace Inlog.Desafio.Backend.Infra.Database.Context
         }
 
         public DbSet<Veiculo>? Veiculos { get; set; }
-        public DbSet<Rastreamento>? Rastreamentos { get; set; }
     }
 }

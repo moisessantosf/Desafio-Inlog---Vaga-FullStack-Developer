@@ -20,9 +20,12 @@ namespace Inlog.Desafio.Backend.Application.Services
         {
             Veiculo newVeiculo = new Veiculo()
             {
+                Placa = veiculo.Placa,
                 Chassi = veiculo.Chassi,
-                TipoVeiculo = veiculo.TipoVeiculo,
-                Cor = veiculo.Cor
+                TipoVeiculo =  (TipoVeiculo)int.Parse(veiculo.TipoVeiculo),
+                Cor = veiculo.Cor,
+                Latitude = veiculo.Latitude,
+                Longitude = veiculo.Longitude
             };
 
             var response = await _veiculoRepository.CreateAsync(newVeiculo);
@@ -44,11 +47,11 @@ namespace Inlog.Desafio.Backend.Application.Services
                 MsgErro = response ? "" : "Não foi possível excluir o veículo.",
                 Data = response
             };
-        }
-
-        public async Task<Result<IList<VeiculoDTO>>> GetAll()
+        }     
+        
+        public async Task<Result<IList<VeiculoDTO>>> GetAll(double? latitude, double? longitude)
         {
-            var response = await _veiculoRepository.GetAll();
+            var response = await _veiculoRepository.GetAll(latitude, longitude);
 
             return new Result<IList<VeiculoDTO>>
             {

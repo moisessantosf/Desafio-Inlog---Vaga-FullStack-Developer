@@ -6,7 +6,7 @@ namespace Inlog.Desafio.Backend.Application.Interfaces
 {
     public interface IVeiculoService
     {
-        Task<Result<IList<VeiculoDTO>>> GetAll();
+        Task<Result<IList<VeiculoDTO>>> GetAll(double? latitude, double? longitude);
         Task<Result<VeiculoDTO>> GetVeiculoAsync(int id);
         Task<Result<VeiculoDTO>> CreateAsync(VeiculoCreateRequestDTO veiculo);
         Task<Result<VeiculoDTO>> UpdateAsync(Veiculo veiculo);
